@@ -47,41 +47,39 @@ function addLivros(livro) {
     livros.push(livro)
 }
 
-//primeiro livro criado
-livro1 = new Livro('o idiota', 'Fiodor dostoievski', '200', 'romance', 'livro classico, uma das obras mais aclamadas de dostoievski')
-
-livro2 = new Livro('os irmaos karamazov', 'Fiodor dostoievsk', '200', 'romance', 'Considerada a maior obra de Fiodor Dostoievski')
-
-addLivros(livro1)
-addLivros(livro2)
-console.log(livros[0].info())
-console.log(livros[2])
-
-
 //loop de renderizacao
-
 function render() {
     ul1.innerHTML = ' '
     for (let i = 0; i < livros.length; i++) {
-        //cria o botao ao lado de cada livro na lista
+        //cria o botao 'delete' ao lado de cada livro na lista
         let deleteButton = document.createElement('BUTTON')
         deleteButton.className = 'delete'
-
-        let readButton = document.createElement('button')
-        let text = document.createTextNode('marcar como lido')
-        readButton.appendChild(text)
-        readButton.addEventListener('click', function(){
-            marcarLido(i);
-        })
-
-
         text = document.createTextNode("deletar")
         deleteButton.appendChild(text);
 
-        const li = document.createElement('li')
+        // cria o botao 'read' ao lado de cada livro na lista
+        //juntamente com o seu icone
+        let icone = document.createElement('i')
+        icone.innerHTML = '<i class="fa-regular fa-bookmark"></i>'
+        let readButton = document.createElement('button')
+        let text = document.createTextNode('marcar como lido')
+        readButton.appendChild(text)
+
+        //evento do botao de 'marcar como lido'
+        readButton.addEventListener('click', function() {
+            marcarLido(i, icone);
+        })
+
+        //evento do batao de 'deletar'
         deleteButton.addEventListener('click', () => removeLivro(i));
+    
+        //criacao de um elemento html para cada livro na lista
+        const li = document.createElement('li')
         li.textContent = livros[i].titulo
+
+        //'grudando' tudo 
         ul1.appendChild(li)
+        li.appendChild(icone)
         li.appendChild(deleteButton)
         li.appendChild(readButton)
 
@@ -93,8 +91,16 @@ function removeLivro(index) {
     render();
 }
 
-function marcarLido(index) {
-    livros[index].lido = true
-    console.log(livros[index].lido)
+function marcarLido(index, icone) {
+    if (livros[index].lido == false){
+        livros[index].lido = true
+        icone.innerHTML= '<i class="fa-solid fa-bookmark"></i>'
+        console.log(livros[index].lido)
+        console.log(livros[index].parentNode.nodeName)
+    }else{ 
+        livros[index].lido = false
+        icone.innerHTML = '<i class="fa-regular fa-bookmark"></i>'
+        console.log(livros[index].lido)
+    }
 }
 

@@ -54,7 +54,7 @@ function render() {
         //cria o botao 'delete' ao lado de cada livro na lista
         let deleteButton = document.createElement('BUTTON')
         deleteButton.className = 'delete'
-        text = document.createTextNode("deletar")
+        let text = document.createTextNode("deletar")
         deleteButton.appendChild(text);
 
         // cria o botao 'read' ao lado de cada livro na lista
@@ -62,7 +62,7 @@ function render() {
         let icone = document.createElement('i')
         icone.innerHTML = '<i class="fa-regular fa-bookmark"></i>'
         let readButton = document.createElement('button')
-        let text = document.createTextNode('marcar como lido')
+        text = document.createTextNode('marcar como lido')
         readButton.appendChild(text)
 
         //evento do botao de 'marcar como lido'
@@ -72,7 +72,7 @@ function render() {
 
         //evento do batao de 'deletar'
         deleteButton.addEventListener('click', () => removeLivro(i));
-    
+
         //criacao de um elemento html para cada livro na lista
         const li = document.createElement('li')
         li.textContent = livros[i].titulo
@@ -92,12 +92,12 @@ function removeLivro(index) {
 }
 
 function marcarLido(index, icone) {
-    if (livros[index].lido == false){
+    if (livros[index].lido == false) {
         livros[index].lido = true
-        icone.innerHTML= '<i class="fa-solid fa-bookmark"></i>'
+        icone.innerHTML = '<i class="fa-solid fa-bookmark"></i>'
         console.log(livros[index].lido)
         console.log(livros[index].parentNode.nodeName)
-    }else{ 
+    } else {
         livros[index].lido = false
         icone.innerHTML = '<i class="fa-regular fa-bookmark"></i>'
         console.log(livros[index].lido)
